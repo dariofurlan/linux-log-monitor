@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-<<<<<<< Updated upstream
-=======
 # dependecies:
 # inotify-tools
 
@@ -15,25 +13,12 @@ is_string_to_write() {
     fi
 }
 
->>>>>>> Stashed changes
 if [ "$EUID" -ne 0 ]
 then
     echo "Please run as root"
     exit
 fi
 
-<<<<<<< Updated upstream
-# todo check if line is already written if not write the newline
-log='$(whoami) [$$]: $(history 1 | sed "s/^[ ]*[0-9]\+[ ]*//" ) [$RETRN_VAL]'
-newline1="export PROMPT_COMMAND='RETRN_VAL=$?;logger -p local6.debug "${log}"'"
-#echo "$newline1" >> /etc/bash.bashrc
-echo $newline1
-
-newline2="local6.*    /var/log/commands.log"
-#echo "$newline2" >> /etc/rsyslog.d/bash.conf
-
-# login hook da mettere in /etc/profile.d/[script].sh
-=======
 log_hook='$()'
 log='$(whoami) [$$]: $(history 1 | sed "s/^[ ]*[0-9]\+[ ]*//" ) [$RETRN_VAL]'
 newline1="export PROMPT_COMMAND='RETRN_VAL=$?;logger -p local6.debug '${log_hook} ${log}'"
@@ -49,4 +34,3 @@ fi
 
 # todo una grande libreria bash con tutte le funzioni per l'ambiente
 # todo login hook da mettere in /etc/profile.d/[script].sh
->>>>>>> Stashed changes
