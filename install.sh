@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# dependecies:
-# inotify-tools
-
 is_string_to_write() {
     #pass as first argument the string ang then the file
     if grep -Fxq "$1" $2
@@ -21,7 +18,7 @@ fi
 
 log_hook='$()'
 log='$(whoami) [$$]: $(history 1 | sed "s/^[ ]*[0-9]\+[ ]*//" ) [$RETRN_VAL]'
-newline1="export PROMPT_COMMAND='RETRN_VAL=$?;logger -p local6.debug '${log_hook} ${log}'"
+newline1="export PROMPT_COMMAND='RETRN_VAL=$?;logger -p local6.debug \"${log_hook} ${log}\"'"
 if is_string_to_write "$newline1" "/etc/bash.bashrc"
 then
     echo "$newline1" >> /etc/bash.bashrc
