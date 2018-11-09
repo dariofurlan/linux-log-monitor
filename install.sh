@@ -15,7 +15,6 @@ then
     echo "Please run as root"
     exit
 fi
-
 log_hook='$()'
 log='$(whoami) [$$]: $(history 1 | sed "s/^[ ]*[0-9]\+[ ]*//" ) [$RETRN_VAL]'
 newline1="export PROMPT_COMMAND='RETRN_VAL=$?;logger -p local6.debug \"${log_hook} ${log}\"'"
@@ -29,5 +28,10 @@ then
     echo "$newline2" >> /etc/rsyslog.d/bash.conf
 fi
 
+login_hook=""
+if is_string_to_write "$login_hook" "/etc/profile"
+then
+    echo "$login_hook" >> /etc/profile
+fi
 # todo una grande libreria bash con tutte le funzioni per l'ambiente
 # todo login hook da mettere in /etc/profile.d/[script].sh
