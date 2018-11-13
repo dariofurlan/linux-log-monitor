@@ -62,24 +62,19 @@
             socket.emit("join", "commands");
         });
         socket.on('login', function () {
-            console.log("someone logged");
+            console.log("login");
             $('#messages').append($('<li>').text("login"));
         });
-        socket.on('commands', function () {
+        socket.on('commands', function (data) {
+            console.log(data);
+            let json = JSON.parse(data);
             console.log("command received");
-            $('#messages').append($('<li>').text("comando"));
-        });
-        $('#myform').submit(function (event) {
-            socket.emit($("#type").val(), $("#msg").val());
-            event.preventDefault();
+            console.log(json.event);
+            $('#messages').append($('<li>').text("comando: "+json.data.command));
         });
     });
 </script>
 <body>
 <ul id="messages"></ul>
-<form id="myform">
-    <input id="type" autocomplete="off"/><input id="msg"/>
-    <button id="send">Send</button>
-</form>
 </body>
 </html>

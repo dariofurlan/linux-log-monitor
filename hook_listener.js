@@ -8,7 +8,7 @@ const io = require('socket.io')(server, {
     cookie: false
 });
 const ports = {
-    socketio : 9001,
+    socketio: 9001,
     hook_server: 9000
 };
 const rooms = ["commands", "login"];
@@ -41,9 +41,16 @@ const local_hook_server = net.createServer((sock) => {
             let js = JSON.parse(data);
             let event = js["event"];
             console.log(event);
-            console.log(js.data);
-            if (rooms.includes(event))
-                io.sockets.to(event).emit(event, data/*todo message to send...*/);
+            switch (event) {
+                case "commands":
+                    io.sockets.to("commands").emit("commands", JSON.stringify(js));
+                    break;
+                case "login":
+                    io.sockets.to("login").emit("login", JSON.stringify(js));
+                    break;
+                default:
+                    break;
+            }
         } catch (e) {
             console.error(e);
             console.error(data.toString('utf8'));
@@ -51,7 +58,7 @@ const local_hook_server = net.createServer((sock) => {
     });
 });
 
-server.listen(ports.socketio,()=> {
+server.listen(ports.socketio, () => {
     console.log("Socketi.IO is listening on port: " + ports.socketio);
 });
 local_hook_server.listen({port: ports.hook_server}, () => {
