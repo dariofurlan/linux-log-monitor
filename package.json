@@ -1,0 +1,22 @@
+{
+  "name": "linux-log-monitor",
+  "version": "1.0.0",
+  "description": "Admin tools to monitor access and bash commands in linux",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iofurlan/linux-log-monitor.git"
+  },
+  "author": "Dario Furlan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iofurlan/linux-log-monitor/issues"
+  },
+  "homepage": "https://github.com/iofurlan/linux-log-monitor#readme",
+  "dependencies": {
+    "socket.io": "^2.1.1"
+  }
+}
