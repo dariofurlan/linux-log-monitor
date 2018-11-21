@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Socket.IO chat</title>
+    <title>log_monitor</title>
     <meta charset="utf-8"/>
     <style>
         * {
@@ -55,26 +55,27 @@
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
     $(function () {
-        var socket = io('http://localhost:9001/');
+        const socket = io('http://localhost:9001/');
         socket.on('connect', function () {
             console.log("connected");
             socket.emit("join", "login");
-            socket.emit("join", "commands");
+            socket.emit("join", "command");
+            $('#messages').append($('<li>').text("CONNESSO"));
         });
         socket.on('login', function () {
             console.log("login");
             $('#messages').append($('<li>').text("login"));
         });
-        socket.on('commands', function (data) {
+        socket.on('command', function (data) {
             console.log(data);
             let json = JSON.parse(data);
             console.log("command received");
-            console.log(json.event);
-            $('#messages').append($('<li>').text("comando: "+json.data.command));
+            $('#messages').append($('<li>').text("comando: "+json.command));
         });
     });
 </script>
 <body>
+<h1>LOG-MONITOR</h1>
 <ul id="messages"></ul>
 </body>
 </html>

@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/iofurlan/linux-log-monitor#readme",
   "dependencies": {
-    "socket.io": "^2.1.1"
+    "express": "^4.16.4",
+    "socket.io": "^2.1.1",
+    "body-parser": "latest"
   }
 }
