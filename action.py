@@ -8,8 +8,6 @@ import datetime
 import requests
 
 
-
-
 def unused():
     output = subprocess.check_output(['last'])
     print(output.decode("utf-8"))
@@ -38,6 +36,7 @@ if __name__ == "__main__":
         requests.get('http://localhost:9000/command', params=log_info)
     elif sys.argv[1] == "login":
         # echo $(who | head -n[line] | tail -n1) | cut -d " " -f[field of line]
+        # get all the info to send from "who is enricopapi"
         pass
         # passo ip, tty, utente,
         # aggiornare tabella delle sessioni con il comando last (chi da quando a quando) e durata

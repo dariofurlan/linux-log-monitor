@@ -1,6 +1,3 @@
-const net = require('net');
-
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const hook_server = express().use(bodyParser.json());
@@ -22,8 +19,8 @@ hook_server.get('/command', (req, res) => {
 });
 
 
-const server = require('http').createServer();
-const io = require('socket.io')(server, {
+const sockio_server = require('http').createServer();
+const io = require('socket.io')(sockio_server, {
     origins: '*:*',
     serveClient: false,
     pingInterval: 10000,
@@ -59,12 +56,27 @@ io.on('connection', socket => {
     });
 });
 
-server.listen(ports.socketio, () => {
+sockio_server.listen(ports.socketio, () => {
     console.log("Socketi.IO is listening on port: " + ports.socketio);
 });
-hook_server.listen(ports.hook_server, 'localhost', () => console.log('Hook Server is listening'));
-/*
-local_hook_server.listen({port: ports.hook_server}, () => {
-    console.log("Hook Server is listening on port: " + ports.hook_server);
+hook_server.listen(ports.hook_server, 'localhost', () => console.log('Hook Server is listening on '+ports.hook_server));
+
+process.on('SIGINT', () => {
+    console.info('SIGINT signal received.');
+    sockio_server.close((err)=> {
+        // if error, log and exit with error (1 code)
+        if (err) {
+            console.error(err);
+            process.exit(1);
+        }
+
+        // close your database connection and exit with success (0 code)
+    });
+    hook_server.close((err)=> {
+        if (err) {
+            console.error(err);
+            process.exit(1);
+        }
+
+    });
 });
-*/

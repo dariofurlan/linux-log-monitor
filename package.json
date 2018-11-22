@@ -4,11 +4,14 @@
   "description": "Admin tools to monitor access and bash commands in linux",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
+    "install": "bash install.sh",
     "type": "git",
-    "url": "git+https://github.com/iofurlan/linux-log-monitor.git"
+    "url": "git+https://github.com/iofurlan/linux-log-monitor.git",
+    "build": ""
   },
   "author": "Dario Furlan",
   "license": "MIT",
